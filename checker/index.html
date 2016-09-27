@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <title>HTML code accessibility checker</title>
@@ -37,7 +37,7 @@ li.ordered { list-style-image: none; color: #666; }
 
 <p>Document title: <span id="doctitle"></span></p>
 
-<iframe id=myframe src="none.html" onLoad="frame = document.getElementById('myframe').contentWindow.document;check();" style="width: 80%; margin: 0 10%; border-radius: 10px;"></iframe>
+<iframe id=myframe src="none.html" onLoad="frame = document.getElementById('myframe').contentWindow.document; if (this.src.split('/').pop() != 'none.html') { check(); }" style="width: 80%; margin: 0 10%; border-radius: 10px;"></iframe>
 
 <div id=html></div>
 <div id=metadata></div>
@@ -163,7 +163,7 @@ title = "<h2>Document metadata</h2>"
 
 // TITLE ELEMENT
 var titleElement = frame.querySelector('title')
-document.getElementById('doctitle').textContent = titleElement.textContent
+if (titleElement.textContent != null) document.getElementById('doctitle').textContent = titleElement.textContent
 check += '<p class="guideline"><input type="checkbox"/> <a target="_blank" href="http://www.w3.org/TR/WCAG20-TECHS/H25.html">Define the purpose of the document in a simple phrase in the <code class="kw" translate="no">title</code> element.</a></p>'
 if (titleElement != null) { check += '<ul><li class=info><code class="kw" translate="no">title</code> element contains: "<code>'+titleElement.textContent+'</code>".</li></ul></li>' }
 else { checked += '<li class=error">No <code class="kw" translate="no">title</code> element found.</li></ul>' 	}
